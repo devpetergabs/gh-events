@@ -1,6 +1,9 @@
-name: Events Demo 1
+name: Event triggered demo workflow
 on: 
   push:
+    branches:
+      - main
+  workflow_dispatch:
 
 jobs:
   deploy:
