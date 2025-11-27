@@ -1,6 +1,8 @@
-name: Events Demo 1
+name: Event triggered demo workflow
 on: 
-  push:
+  pull_request:
+    types: [opened, synchronize, reopened]
+  workflow_dispatch:
 
 jobs:
   deploy:
