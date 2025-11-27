@@ -1,6 +1,6 @@
 name: Event triggered demo workflow
 on: 
-  pull_request_target:
+  pull_request:
     types: [opened, synchronize, reopened]
   workflow_dispatch:
 
@@ -19,6 +19,6 @@ jobs:
       - name: Build code
         run: |
           npm run build
-          echo " HEADDd - ${{ github.head_ref }} "
+          echo " HEADDd - ${{ github.head_ref }}"
       - name: Deploy project
         run: echo "Deploying..."
