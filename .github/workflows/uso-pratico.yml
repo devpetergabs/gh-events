@@ -4,8 +4,9 @@ on:
         branches: 
             - main
             - dev
+
     pull_request:
-        types: [opened, synchronize, reopened]
+        types: [opened, reopened]
 jobs:
     gerar-artefato:
         runs-on: ubuntu-latest
