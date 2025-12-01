@@ -45,6 +45,6 @@ jobs:
             - name: use artifact
               run: |
                     echo "Using artifact..."
-                    cat artifact.txt
+                    cat artifact1.txt
                     ls -la
                     cat context.json
