@@ -11,13 +11,13 @@ jobs:
         runs-on: ubuntu-latest
         steps:
             - name: checkout code
-              uses: actions/checkout@v3
+              uses: actions/checkout@v4
             - name: create artifact
               run: |
                 echo "Creating artifact..."
                 echo "Sample  ${{ github.event_name }}" > artifact.txt
             - name: upload artifact
-              uses: actions/upload-artifact@v3
+              uses: actions/upload-artifact@v4
               with:
                 name: sample-artifact
                 path: artifact.txt
@@ -26,7 +26,7 @@ jobs:
         runs-on: ubuntu-latest
         steps:
             - name: download artifact
-              uses: actions/download-artifact@v3
+              uses: actions/download-artifact@v4
               with:
                 name: sample-artifact
 
