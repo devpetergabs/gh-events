@@ -1,7 +1,7 @@
 name: Event triggered demo workflow
 on: 
   pull_request:
-    types: [opened, synchronize, reopened] ## activity types filtros por tipo de atividade
+    types: [opened, synchronize, reopened] ## activity types filtros por tipo de atividade pode enviar lista ou apenas um tipo
   push:
     branches: [ main, develop ] ##filtro por ramas
   workflow_dispatch:
@@ -12,15 +12,20 @@ jobs:
     steps:
       - name: Output event data
         run: echo "${{ toJSON(github.event) }}"
+
       - name: Get code
         uses: actions/checkout@v3
+
       - name: Install dependencies
         run: npm install
+
       - name: Test code
         run: npm run test
+
       - name: Build code
         run: |
           npm run build
           echo " HEADDd - ${{ github.head_ref }}"
+          
       - name: Deploy project
         run: echo "Deploying..."
