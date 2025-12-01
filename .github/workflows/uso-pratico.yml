@@ -32,8 +32,8 @@ jobs:
                 path: |
                  artifact.txt
                  artifact1.txt
-                 artifacts/
-                 context.json
+                 artifacts/context.json
+                 
 
     consumir-artefato:
         needs: gerar-artefato
