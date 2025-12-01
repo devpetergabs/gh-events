@@ -49,4 +49,4 @@ jobs:
                     cat artifact1.txt
                     ls -la
                     cd artifacts
-                    cat context.json
+                    ls
