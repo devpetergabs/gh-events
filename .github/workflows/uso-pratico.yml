@@ -1,0 +1,36 @@
+name: Consome Artefato criado em proprio wf
+on: 
+    push:
+        branches: 
+            - main
+            - dev
+    pull_request:
+        types: [opened, synchronize, reopened]
+jobs:
+    gerar-artefato:
+        runs-on: ubuntu-latest
+        steps:
+            - name: checkout code
+              uses: actions/checkout@v3
+            - name: create artifact
+              run: |
+                echo "Creating artifact..."
+                echo "Sample  ${{ github.event_name }}" > artifact.txt
+            - name: upload artifact
+              uses: actions/upload-artifact@v3
+              with:
+                name: sample-artifact
+                path: artifact.txt
+    consumir-artefato:
+        needs: gerar-artefato
+        runs-on: ubuntu-latest
+        steps:
+            - name: download artifact
+              uses: actions/download-artifact@v3
+              with:
+                name: sample-artifact
+
+            - name: use artifact
+              run: |
+                    echo "Using artifact..."
+                    cat artifact.txt
