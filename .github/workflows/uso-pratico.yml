@@ -9,6 +9,8 @@ on:
 jobs:
     gerar-artefato:
         runs-on: ubuntu-latest
+        env:
+            GITHUB_CONTEXT: ${{ toJson(github) }}
         steps:
             - name: checkout code
               uses: actions/checkout@v4
@@ -16,7 +18,7 @@ jobs:
               run: |
                 echo "Creating artifact..."
                 echo "Sample ${{ github.event_name }}" > artifact.txt
-                echo $GITHUB_CONTEXT >> context.json
+                echo "$GITHUB_CONTEXT" >> context.json
 
             - name: upload artifact
               uses: actions/upload-artifact@v4
