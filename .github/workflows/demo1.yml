@@ -1,9 +1,9 @@
 name: Event triggered demo workflow
 on: 
   pull_request:
-    types: [opened, synchronize, reopened]
+    types: [opened, synchronize, reopened] ## activity types filtros por tipo de atividade
   push:
-    branches: [ main, develop ]
+    branches: [ main, develop ] ##filtro por ramas
   workflow_dispatch:
 
 jobs:
