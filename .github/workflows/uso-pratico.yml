@@ -55,7 +55,7 @@ jobs:
               run: |
                     echo "Using artifact..."
                     cat artifact-*.txt
-                    ls | grep ${{ steps.create.outputs.filename }}
+                    ls -l "${{ steps.create.outputs.filename }}"
                     cd artifacts
                     ls 
                     
