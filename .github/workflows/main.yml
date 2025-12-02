@@ -1,0 +1,26 @@
+name: Event triggered demo workflow
+on: 
+  pull_request:
+    types: [opened, reopened] ## activity types filtros por tipo de atividade pode enviar lista ou apenas um tipo
+  push:
+    branches: [ main, dev ] ##filtro por ramas
+    paths-ignore:
+      - '.github/workflows/uso-pratico.yml'  ##ignorar mudanças em uso-pratico
+  workflow_dispatch:
+
+jobs:
+  job1:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4 
+      - name: Display event info
+        run: |
+          echo "Event Name: ${{ github.event_name }}"
+          echo "Event Action: ${{ github.event.action }}"
+          echo "Repository: ${{ github.repository }}"
+          echo "Sender: ${{ github.event.sender.login }}"   
+  job2:
+    uses: ./.github/workflows/uso-pratico.yml  ##chama o workflow uso-pratico como reuso de codigo
+    with:
+      nome-arquivo: 'arquivo-de-teste.txt'  ##passa o parametro nome-arquivo para o workflow uso-pratico
