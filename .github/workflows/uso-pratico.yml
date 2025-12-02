@@ -1,14 +1,5 @@
 name: Consome Artefato criado em proprio wf
-on: 
-    push:
-        branches: 
-            - main
-            - dev
-            - 'feature/**'
-
-    pull_request:
-        types: [opened, reopened]
-
+on:      
     workflow_call:
       inputs:
         nome-arquivo:
@@ -30,9 +21,8 @@ jobs:
               
             - name: get name-archive ##definido anteriormente para poder ser usado no step create
               run: |
-                echo "ARQUIVO_NOME=${{ inputs.nome-arquivo }}$(date +%Y%m%d%H%M%S)" >> $GITHUB_ENV
-                
-            
+                echo "ARQUIVO_NOME=${{ inputs.nome-arquivo }}$(date +%Y%m%d%H%M%S)" >> $GITHUB_ENV ##Define somente a String ARQUIVO_NOME com o valor do input nome-arquivo mais a data e hora atual no formato ano mes dia hora minuto segundo
+
             - name: create artifact
               id: create
               run: |
@@ -53,7 +43,7 @@ jobs:
                 name: sample-artifacts
                 path: |
                  name-artifact.txt
-                 $filename.txt  
+                 $filename
                  artifacts
                  
     consumir-artefato:

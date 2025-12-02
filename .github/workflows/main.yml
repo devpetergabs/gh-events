@@ -23,4 +23,4 @@ jobs:
   job2:
     uses: ./.github/workflows/uso-pratico.yml  ##chama o workflow uso-pratico como reuso de codigo
     with:
-      nome-arquivo: 'arquivo-de-teste.txt'  ##passa o parametro nome-arquivo para o workflow uso-pratico
+      nome-arquivo: 'arquivo-de-teste'  ##passa o parametro nome-arquivo para o workflow uso-pratico
