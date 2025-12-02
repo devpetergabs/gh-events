@@ -24,7 +24,7 @@ jobs:
               run: |
                 echo "Creating artifact..."
                 echo "Sample ${{ github.event_name }}" > artifact.txt
-                echo "${{ github.actor }}" > artifact-$DATE.
+                echo "${{ github.actor }}" > artifact-$DATE.txt
                 ls
                 mkdir artifacts
                 cd artifacts
