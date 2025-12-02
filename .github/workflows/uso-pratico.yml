@@ -39,7 +39,7 @@ jobs:
                 echo "Creating artifact..."
                 echo "Sample ${{ github.event_name }}" > artifact.txt
                 echo "${{ github.actor }}" > $ARQUIVO_NOME.txt
-                filename=$(ls artifact-*.txt)
+                filename=$(ls $ARQUIVO_NOME.txt)
                 echo "filename=$filename" >> $GITHUB_OUTPUT ##gerado o output filename para ser usado no output do job
                 ls
                 mkdir artifacts
@@ -53,7 +53,7 @@ jobs:
                 name: sample-artifacts
                 path: |
                  artifact.txt
-                 artifact-${{ env.DATE }}.txt  
+                 $ARQUIVO_NOME.txt  
                  artifacts
                  
     consumir-artefato:
