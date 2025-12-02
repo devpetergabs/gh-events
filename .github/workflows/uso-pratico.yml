@@ -37,7 +37,7 @@ jobs:
               id: create
               run: |
                 echo "Creating artifact..."
-                echo "Sample ${{ github.event_name }}" > artifact.txt
+                echo "Sample ${{ github.event_name }}" > name-artifact.txt
                 echo "${{ github.actor }}" > $ARQUIVO_NOME.txt
                 filename=$(ls $ARQUIVO_NOME.txt)
                 echo "filename=$filename" >> $GITHUB_OUTPUT ##gerado o output filename para ser usado no output do job
@@ -52,8 +52,8 @@ jobs:
               with:
                 name: sample-artifacts
                 path: |
-                 artifact.txt
-                 $ARQUIVO_NOME.txt  
+                 name-artifact.txt
+                 $filename.txt  
                  artifacts
                  
     consumir-artefato:
