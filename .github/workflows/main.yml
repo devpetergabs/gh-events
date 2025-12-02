@@ -1,4 +1,4 @@
-name: Event triggered demo workflow
+name: Main WF
 on: 
   pull_request:
     types: [opened, reopened] ## activity types filtros por tipo de atividade pode enviar lista ou apenas um tipo
@@ -24,3 +24,8 @@ jobs:
     uses: ./.github/workflows/uso-pratico.yml  ##chama o workflow uso-pratico como reuso de codigo
     with:
       nome-arquivo: 'arquivo-de-teste'  ##passa o parametro nome-arquivo para o workflow uso-pratico
+  job3:
+    uses: ./.github/workflows/uso-variaveis-.yml  ##chama o workflow uso-variaveis como reuso de codigo
+    with:
+      nome: 'Maria'
+      idade: '25'
