@@ -22,7 +22,7 @@ jobs:
               run: |
                 echo "Nome: ${{ github.actor }} + ${{ inputs.nome }}"
                 echo "Idade: ${{ inputs.idade }}"
-                idade-saida=$((${{ inputs.idade }} + 5)) >> $GITHUB_OUTPUT
+                echo "idade-saida=$((${{ inputs.idade }} + 5))" >> $GITHUB_OUTPUT
 
     exibir-idade-saida:
         needs: exibir-variaveis
