@@ -38,7 +38,7 @@ jobs:
                 path: |
                  artifact.txt
                  artifact-${{ env.DATE }}.txt  
-                 artifacts/context.json
+                 artifacts
                  
     consumir-artefato:
         needs: gerar-artefato
@@ -52,7 +52,7 @@ jobs:
             - name: use artifact
               run: |
                     echo "Using artifact..."
-                    ls -la
                     cat artifact-*.txt
                     cd artifacts
+                    ls
                     
