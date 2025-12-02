@@ -37,7 +37,7 @@ jobs:
                 name: sample-artifacts
                 path: |
                  artifact.txt
-                 artifact-$DATE.txt
+                 artifact-${{ env.DATE }}.txt  
                  artifacts/context.json
                  
     consumir-artefato:
