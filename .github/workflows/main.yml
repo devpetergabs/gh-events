@@ -1,4 +1,4 @@
-name: Event triggered demo workflow
+name: Main WF
 on: 
   pull_request:
     types: [opened, reopened] ## activity types filtros por tipo de atividade pode enviar lista ou apenas um tipo

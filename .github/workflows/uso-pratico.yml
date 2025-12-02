@@ -1,4 +1,4 @@
-name: Consome Artefato criado em proprio wf
+name: Consumes Artifact WF
 on:      
     workflow_call:
       inputs:
