@@ -12,10 +12,29 @@ on:
                 type: string
 jobs:
     exibir-variaveis:
+        if: contains(github.actor, 'dev')
         runs-on: ubuntu-latest
+        outputs:
+            idade-saida: ${{ inputs.idade }}
+        
         steps:
             - name: exibir nome e idade
               run: |
-                echo "Nome: ${{ github.actor }} + ${{ github.event.inputs.nome }}"
-                echo "Idade: ${{ github.event.inputs.idade }}"
-                    
+                echo "Nome: ${{ github.actor }} + ${{ inputs.nome }}"
+                echo "Idade: ${{ inputs.idade }}"
+            
+            - name: carregar valor da idade e adicionar 5 anos
+              run: |
+                idade-saida = toInt(${{ inputs.idade }})
+                echo "Idade antes da adição: $idade-saida"
+                idade-saida = idade-saida + 5
+    
+    exibir-idade-saidade:
+        needs: exibir-variaveis
+        runs-on: ubuntu-latest
+        steps:
+            - name: mostrar idade de saida do job anterior
+              run: |
+                echo "Idade de saída do job anterior: ${{ needs.exibir-variaveis.outputs.idade-saida }}"
+
+                
