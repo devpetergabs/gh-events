@@ -5,7 +5,7 @@ on:
   push:
     branches: [ main, dev ] ##filtro por ramas
     paths-ignore:
-      - '.github/workflows/**'  ##ignorar mudanças em uso-pratico
+      - '.github/workflows/uso-pratico.yml'  ##ignorar mudanças em uso-pratico
   workflow_dispatch:
 
 jobs:
