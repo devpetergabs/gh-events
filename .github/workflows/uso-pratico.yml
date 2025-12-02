@@ -52,7 +52,7 @@ jobs:
             - name: use artifact
               run: |
                     echo "Using artifact..."
-                    cat artifact1.txt
                     ls -la
+                    cat artifact1.txt
                     cd artifacts
-                    ls
+                    
