@@ -33,7 +33,6 @@ jobs:
                 cd artifacts
                 echo "$GITHUB_CONTEXT" >> contexts.json
                 echo "$GITHUB_CONTEXT" >> context.json
-
             - name: upload artifact
               uses: actions/upload-artifact@v4
               with:
@@ -55,7 +54,7 @@ jobs:
             - name: use artifact
               run: |
                     echo "Using artifact..."
-                    cat artifact-*.
+                    cat artifact-*.txt
                     ls | grep ${{ steps.create.outputs.filename }}
                     cd artifacts
                     ls 
