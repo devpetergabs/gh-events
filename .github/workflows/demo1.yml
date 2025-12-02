@@ -4,6 +4,8 @@ on:
     types: [opened, reopened] ## activity types filtros por tipo de atividade pode enviar lista ou apenas um tipo
   push:
     branches: [ main, dev ] ##filtro por ramas
+    paths-ignore:
+      - 'workflow/uso-pratico.yml'  ##ignorar mudanças em uso-pratico
   workflow_dispatch:
 
 jobs:
