@@ -8,6 +8,7 @@ on:
 
     pull_request:
         types: [opened, reopened]
+
 jobs:
     gerar-artefato:
         runs-on: ubuntu-latest
@@ -16,12 +17,14 @@ jobs:
         steps:
             - name: checkout code
               uses: actions/checkout@v4
-
+            - name: get date
+              run: |
+                echo "DATE=$(date +%Y%m%d%H%M%S)" >> $GITHUB_ENV
             - name: create artifact
               run: |
                 echo "Creating artifact..."
-                echo "Sample ${{ github.event_name }}" > artifact.txt
-                echo "${{ github.actor }}" > artifact1.txt
+                echo "Sample ${{ github.event_name }}" > artifact.
+                echo "${{ github.actor }}" > artifact1-$DATE.txt
                 mkdir artifacts
                 cd artifacts
                 echo "$GITHUB_CONTEXT" >> contexts.json
