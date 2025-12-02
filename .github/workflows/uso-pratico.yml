@@ -10,8 +10,13 @@ on:
         types: [opened, reopened]
 
     workflow_call:
+      inputs:
+        nome-arquivo:
+            description: 'Nome do arquivo a ser criado'
+            default: 'artifact'
+            required: false
+            type: string
       
-
 jobs:
     gerar-artefato:
         runs-on: ubuntu-latest
@@ -23,16 +28,17 @@ jobs:
             - name: checkout code
               uses: actions/checkout@v4
               
-            - name: get date ##definido anteriormente para poder ser usado no step create
+            - name: get name-archive ##definido anteriormente para poder ser usado no step create
               run: |
-                echo "DATE=$(date +%Y%m%d%H%M%S)" >> $GITHUB_ENV 
+                echo "ARQUIVO_NOME=${{ inputs.nome-arquivo }}$(date +%Y%m%d%H%M%S)" >> $GITHUB_ENV
+                
             
             - name: create artifact
               id: create
               run: |
                 echo "Creating artifact..."
                 echo "Sample ${{ github.event_name }}" > artifact.txt
-                echo "${{ github.actor }}" > artifact-$DATE.txt
+                echo "${{ github.actor }}" > $ARQUIVO_NOME.txt
                 filename=$(ls artifact-*.txt)
                 echo "filename=$filename" >> $GITHUB_OUTPUT ##gerado o output filename para ser usado no output do job
                 ls
