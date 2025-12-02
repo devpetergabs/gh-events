@@ -27,10 +27,11 @@ jobs:
       - name: Build code
         run: |
           npm run build
-          echo " HEADDd - ${{ github.head_ref }}"
+          echo " HEAD - ${{ github.head_ref }}"
           
       - name: Deploy project
         run: echo "Deploying..."
 
+      - run: ls -la
       - name: Uses uso-pratico workflow artifact
         uses: ./.github/workflows/uso-pratico.yml
