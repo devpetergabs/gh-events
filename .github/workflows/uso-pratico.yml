@@ -68,7 +68,7 @@ jobs:
             - name: use artifact
               run: |
                     echo "Using artifact..."
-                    cat artifact-*.txt
+                    cat $ARQUIVO_NOME.txt
                     ls -l "${{ needs.gerar-artefato.outputs.filename }}"
                     cd artifacts
                     ls 
