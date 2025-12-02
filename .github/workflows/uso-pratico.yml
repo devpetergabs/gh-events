@@ -24,7 +24,9 @@ jobs:
               run: |
                 echo "Creating artifact..."
                 echo "Sample ${{ github.event_name }}" > artifact.txt
-                echo "${{ github.actor }}" > artifact-$DATE.txt
+                echo "${{ github.actor }}" > artifact-$DATE.
+                filename=$(ls artifact-*.txt)
+                echo "filename$filename" >> $GITHUB_OUTPUT
                 ls
                 mkdir artifacts
                 cd artifacts
@@ -52,7 +54,8 @@ jobs:
             - name: use artifact
               run: |
                     echo "Using artifact..."
-                    cat artifact-*.txt
+                    cat artifact-*.
+                    ls | grep ${{ needs.gerar-artefato.outputs.filename }}
                     cd artifacts
-                    ls
+                    ls 
                     
