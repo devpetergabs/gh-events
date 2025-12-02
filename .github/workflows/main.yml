@@ -28,4 +28,4 @@ jobs:
     uses: ./.github/workflows/uso-variaveis-.yml  ##chama o workflow uso-variaveis como reuso de codigo
     with:
       nome: 'Maria'
-      idade: '25'
+      idade: 25
