@@ -9,27 +9,21 @@ on:
             idade:
                 description: 'Idade da pessoa'
                 required: true
-                type: string
+                type: number
 jobs:
     exibir-variaveis:
         if: contains(github.actor, 'dev')
         runs-on: ubuntu-latest
         outputs:
-            idade-saida: ${{ inputs.idade }}
-        
+            idade-saida:  ${{ inputs.idade }} ##define a idade de saída do job como o valor do input idade convertido para número
         steps:
             - name: exibir nome e idade
               run: |
                 echo "Nome: ${{ github.actor }} + ${{ inputs.nome }}"
                 echo "Idade: ${{ inputs.idade }}"
-            
-            - name: carregar valor da idade e adicionar 5 anos
-              run: |
-                idade-saida = toInt(${{ inputs.idade }})
-                echo "Idade antes da adição: $idade-saida"
-                idade-saida = idade-saida + 5
-    
-    exibir-idade-saidade:
+                idade-saida=$((${{ inputs.idade }} + 5)) >> $GITHUB_OUTPUT
+
+    exibir-idade-saida:
         needs: exibir-variaveis
         runs-on: ubuntu-latest
         steps:
