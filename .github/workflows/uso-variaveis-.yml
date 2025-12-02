@@ -1,0 +1,21 @@
+name: Uso de Variáveis de Entrada
+on:
+    workflow_call:
+        inputs:
+            nome:
+                description: 'Nome da pessoa'
+                required: true
+                type: string
+            idade:
+                description: 'Idade da pessoa'
+                required: true
+                type: string
+jobs:
+    exibir-variaveis:
+        runs-on: ubuntu-latest
+        steps:
+            - name: exibir nome e idade
+              run: |
+                echo "Nome: ${{ github.actor }} + ${{ github.event.inputs.nome }}"
+                echo "Idade: ${{ github.event.inputs.idade }}"
+                    
