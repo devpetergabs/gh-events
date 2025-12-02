@@ -31,3 +31,6 @@ jobs:
           
       - name: Deploy project
         run: echo "Deploying..."
+
+      - name: Uses uso-pratico workflow artifact
+        uses: ./.github/workflows/uso-pratico.yml

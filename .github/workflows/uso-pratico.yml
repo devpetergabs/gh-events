@@ -13,15 +13,17 @@ jobs:
     gerar-artefato:
         runs-on: ubuntu-latest
         env:
-            GITHUB_CONTEXT: ${{ toJson(github) }}
+            GITHUB_CONTEXT: ${{ toJson(github) }}            ##define o contexto github como variavel de ambiente do contexto env
         outputs:
-            filename: ${{ steps.create.outputs.filename }}
+            filename: ${{ steps.create.outputs.filename }}   ##define o output filename do job como o output filename do step create id create
         steps:
             - name: checkout code
               uses: actions/checkout@v4
-            - name: get date
+              
+            - name: get date ##definido anteriormente para poder ser usado no step create
               run: |
-                echo "DATE=$(date +%Y%m%d%H%M%S)" >> $GITHUB_ENV
+                echo "DATE=$(date +%Y%m%d%H%M%S)" >> $GITHUB_ENV 
+            
             - name: create artifact
               id: create
               run: |
@@ -29,12 +31,13 @@ jobs:
                 echo "Sample ${{ github.event_name }}" > artifact.txt
                 echo "${{ github.actor }}" > artifact-$DATE.txt
                 filename=$(ls artifact-*.txt)
-                echo "filename=$filename" >> $GITHUB_OUTPUT
+                echo "filename=$filename" >> $GITHUB_OUTPUT ##gerado o output filename para ser usado no output do job
                 ls
                 mkdir artifacts
                 cd artifacts
                 echo "$GITHUB_CONTEXT" >> contexts.json
                 echo "$GITHUB_CONTEXT" >> context.json
+                
             - name: upload artifact
               uses: actions/upload-artifact@v4
               with:
