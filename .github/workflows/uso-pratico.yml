@@ -53,6 +53,6 @@ jobs:
               run: |
                     echo "Using artifact..."
                     ls -la
-                    cat artifact1.txt
+                    cat artifact-*.txt
                     cd artifacts
                     
