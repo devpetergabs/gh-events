@@ -26,15 +26,18 @@ jobs:
                 echo "ARQUIVO_NOME=${{ inputs.nome-arquivo }}.$(date +%Y%m%d%H)" >> $GITHUB_ENV
                 echo "ARQUIVO_NOME=${{ inputs.nome-arquivo }}.$(date +%Y%m%d%H)" >> $GITHUB_OUTPUT 
 
+
+              ##output-var gerado de maneira correta (somente uma fonte de verdade)
             - name: set output filename
               id: set-name
               run: |
                 NOME="Gabriel"
                 echo "name=$NOME" >> $GITHUB_OUTPUT 
-                echo "name=$NOME" >> $GITHUB_ENV 
                 
             - name: create artifact
               id: create
+              env:
+                  name: ${{ steps.set-name.outputs.name }}
               run: |
                 echo "Creating artifact..."
                 echo "Nome do evento acionado - ${{ github.event_name }}" > $name.txt
@@ -48,7 +51,7 @@ jobs:
                 path: |
                  name-artifact.txt
                  ${{ env.ARQUIVO_NOME }}.txt
-                 ${{ env.name }}.txt
+                 ${{ steps.set-name.outputs.name }}.txt
              
     consumir-artefato:
         needs: gerar-artefato
