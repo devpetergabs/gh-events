@@ -23,8 +23,8 @@ jobs:
             - name: set name archive
               id: set-name-archive
               run: |
-                echo "ARQUIVO_NOME=${{ inputs.nome-arquivo }}$(date +%Y%m%d%H%M%S)" >> $GITHUB_ENV
-                echo "ARQUIVO_NOME=${{ inputs.nome-arquivo }}$(date +%Y%m%d%H%M%S)" >> $GITHUB_OUTPUT 
+                echo "ARQUIVO_NOME=${{ inputs.nome-arquivo }}.$(date +%Y%m%d%H)" >> $GITHUB_ENV
+                echo "ARQUIVO_NOME=${{ inputs.nome-arquivo }}.$(date +%Y%m%d%H)" >> $GITHUB_OUTPUT 
 
             - name: set output filename
               id: set-name
