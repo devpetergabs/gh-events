@@ -57,14 +57,18 @@ jobs:
                  
     consumir-artefato:
         needs: gerar-artefato
-        runs-on: ubuntu-latest
+        runs-on: ubuntu-
+        env:
+            name: ${{ needs.gerar-artefato.outputs.name }}
         steps:
             - name: download artifact
               uses: actions/download-artifact@v4
               with:
                 name: sample-artifacts
 
-            - name: use artifact
+            - name: use artifact and outputs
+              env:
+                  archive-name: ${{ needs.gerar-artefato.outputs.archive-name }}
               run: |
                     echo "Using artifact..."
                     ls 
