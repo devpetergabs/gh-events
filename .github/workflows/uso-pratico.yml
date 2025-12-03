@@ -55,15 +55,14 @@ jobs:
         runs-on: ubuntu-latest
         env:
             name: ${{ needs.gerar-artefato.outputs.name }}
+            archive-name: ${{ needs.gerar-artefato.outputs.archive-name }}
         steps:
             - name: download artifact
               uses: actions/download-artifact@v4
               with:
                 name: sample-artifacts
 
-            - name: use artifact and outputs
-              env:
-                  archive-name: ${{ needs.gerar-artefato.outputs.archive-name }}
+            - name: use artifact and outputs        
               run: |
                     echo "Lista de arquivos baixados:"
                     ls -la
