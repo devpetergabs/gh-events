@@ -67,6 +67,6 @@ jobs:
               run: |
                     echo "Using artifact..."
                     ls 
-                    cat $archive-name.txt
-                    cat aqui pelo shel de outro job - $name
+                    echo $archive-name
+                    echo "aqui pelo shel de outro job - $name"
                     
