@@ -45,7 +45,7 @@ jobs:
                 echo "$GITHUB_CONTEXT" >> context.json
                 
             - name: upload 
-              uses: actions/upload-artifact@
+              uses: actions/upload-artifact@v4
               with:
                 name: sample-artifacts
                 path: |
