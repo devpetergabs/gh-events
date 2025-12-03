@@ -37,13 +37,9 @@ jobs:
               id: create
               run: |
                 echo "Creating artifact..."
-                echo "Sample ${{ github.event_name }}" > $name.txt
-                echo "${{ github.actor }}" > $ARQUIVO_NOME.txt
-                
-                echo aqui pelo step - $name + $ARQUIVO_NOME >> name-artifact.txt
-              
-                echo "$GITHUB_CONTEXT" >> contexts.json
-                echo "$GITHUB_CONTEXT" >> context.json
+                echo "Nome do evento acionado - ${{ github.event_name }}" > $name.txt
+                echo "Autor - ${{ github.actor }}" > $ARQUIVO_NOME.txt
+                echo "aqui pelo step - $name + $ARQUIVO_NOME" >> name-artifact.txt
                 
             - name: upload 
               uses: actions/upload-artifact@v4
@@ -54,7 +50,6 @@ jobs:
                  ${{ env.ARQUIVO_NOME }}.txt
                  ${{ env.name }}.txt
              
-                 
     consumir-artefato:
         needs: gerar-artefato
         runs-on: ubuntu-latest
@@ -70,8 +65,12 @@ jobs:
               env:
                   archive-name: ${{ needs.gerar-artefato.outputs.archive-name }}
               run: |
-                    echo "Using artifact..."
-                    ls 
-                    echo $archive-name
-                    echo "aqui pelo shel de outro job - $name"
+                    echo "Checando arquivos baixados..."
+                    cat name-artifact.txt
+                    cat $archive-name.txt
+                    cat $name.txt
+                    echo "Nome do arquivo de artefato baixado: $archive-name"
+                    echo "Nome do arquivo de saída do job anterior: $name"
+                    
+                    
                     
