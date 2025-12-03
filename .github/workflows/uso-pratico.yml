@@ -12,25 +12,25 @@ jobs:
     gerar-artefato:
         runs-on: ubuntu-latest
         env:
-            GITHUB_CONTEXT: ${{ toJson(github) }}            ##define o contexto github como variavel de ambiente do contexto env
+            GITHUB_CONTEXT: ${{ toJson(github) }} 
         outputs:
-            archive-name: ${{ steps.set-name-archive.outputs.ARQUIVO_NOME }}  ##define o output filename do job como o output filename do step create id create]
-            name: ${{ steps.set-name.outputs.name }}  ##define o output name do job como o output name do step upload id upload
+            archive-name: ${{ steps.set-name-archive.outputs.ARQUIVO_NOME }}  
+            name: ${{ steps.set-name.outputs.name }}  
         steps:
             - name: checkout code
               uses: actions/checkout@v4
               
-            - name: set name archive ##definido anteriormente para poder ser usado no step create
+            - name: set name archive
               id: set-name-archive
               run: |
-                echo "ARQUIVO_NOME=${{ inputs.nome-arquivo }}$(date +%Y%m%d%H%M%S)" >> $GITHUB_ENV ##Define somente a String ARQUIVO_NOME com o valor do input nome-arquivo mais a data e hora atual no formato ano mes dia hora minuto segundo
-                echo "ARQUIVO_NOME=${{ inputs.nome-arquivo }}$(date +%Y%m%d%H%M%S)" >> $GITHUB_OUTPUT ##Define somente a String ARQUIVO_NOME com o valor do input nome-arquivo mais a data e hora atual no formato ano mes dia hora minuto segundo
+                echo "ARQUIVO_NOME=${{ inputs.nome-arquivo }}$(date +%Y%m%d%H%M%S)" >> $GITHUB_ENV
+                echo "ARQUIVO_NOME=${{ inputs.nome-arquivo }}$(date +%Y%m%d%H%M%S)" >> $GITHUB_OUTPUT 
 
             - name: set output filename
               id: set-name
               run: |
-                echo "name=$"Gabriel"" >> $GITHUB_OUTPUT ##define o output name do step como o valor da variavel de ambiente
-                echo "name=Gabriel" >> $GITHUB_ENV ##define a variavel de ambiente name com o valor Gabriel
+                echo "name=$"Gabriel"" >> $GITHUB_OUTPUT 
+                echo "name=Gabriel" >> $GITHUB_ENV 
                 
             - name: create artifact
               id: create
@@ -51,7 +51,8 @@ jobs:
                 path: |
                  name-artifact.txt
                  ${{ env.ARQUIVO_NOME }}.txt
-                 $name.txt
+                 ${{ env.name }}.txt
+             
                  
     consumir-artefato:
         needs: gerar-artefato
