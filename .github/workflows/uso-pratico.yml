@@ -14,43 +14,44 @@ jobs:
         env:
             GITHUB_CONTEXT: ${{ toJson(github) }}            ##define o contexto github como variavel de ambiente do contexto env
         outputs:
-            filename: ${{ steps.create.outputs.filename }}  ##define o output filename do job como o output filename do step create id create]
-            name: ${{ steps.upload.outputs.name }}  ##define o output name do job como o output name do step upload id upload
+            archive-name: ${{ steps.set-name-archive.outputs.ARQUIVO_NOME }}  ##define o output filename do job como o output filename do step create id create]
+            name: ${{ steps.set-name.outputs.name }}  ##define o output name do job como o output name do step upload id upload
         steps:
             - name: checkout code
               uses: actions/checkout@v4
               
-            - name: get name-archive ##definido anteriormente para poder ser usado no step create
+            - name: set name archive ##definido anteriormente para poder ser usado no step create
+              id: set-name-archive
               run: |
                 echo "ARQUIVO_NOME=${{ inputs.nome-arquivo }}$(date +%Y%m%d%H%M%S)" >> $GITHUB_ENV ##Define somente a String ARQUIVO_NOME com o valor do input nome-arquivo mais a data e hora atual no formato ano mes dia hora minuto segundo
+                echo "ARQUIVO_NOME=${{ inputs.nome-arquivo }}$(date +%Y%m%d%H%M%S)" >> $GITHUB_OUTPUT ##Define somente a String ARQUIVO_NOME com o valor do input nome-arquivo mais a data e hora atual no formato ano mes dia hora minuto segundo
 
+            - name: set output filename
+              id: set-name
+              run: |
+                echo "name=$"Gabriel"" >> $GITHUB_OUTPUT ##define o output name do step como o valor da variavel de ambiente
+                echo "name=Gabriel" >> $GITHUB_ENV ##define a variavel de ambiente name com o valor Gabriel
+                
             - name: create artifact
               id: create
               run: |
                 echo "Creating artifact..."
-                echo "Sample ${{ github.event_name }}" > name-artifact.txt
+                echo "Sample ${{ github.event_name }}" > $name.txt
                 echo "${{ github.actor }}" > $ARQUIVO_NOME.txt
-                filename=$(ls $ARQUIVO_NOME.txt) 
-                echo "filename=$filename" >> $GITHUB_OUTPUT ##gerado o output filename para ser usado no output do job
-                echo filename is $filename
-                ls
-                mkdir artifacts
-                cd artifacts
+                
+                echo aqui pelo step - $name + $ARQUIVO_NOME >> name-artifact.txt
+              
                 echo "$GITHUB_CONTEXT" >> contexts.json
                 echo "$GITHUB_CONTEXT" >> context.json
                 
             - name: upload 
-              id: upload
-              uses: actions/upload-artifact@v4
+              uses: actions/upload-artifact@
               with:
                 name: sample-artifacts
                 path: |
                  name-artifact.txt
-                 ${{ env.ARQUIVO_NOME }}.
-                 name = "Gabriel"
-                 echo "name=$name" >> $GITHUB_OUTPUT ##define o output name do job como o nome do arquivo criado
-                 echo $name
-                 artifacts
+                 ${{ env.ARQUIVO_NOME }}.txt
+                 $name.txt
                  
     consumir-artefato:
         needs: gerar-artefato
@@ -66,5 +67,5 @@ jobs:
                     echo "Using artifact..."
                     ls 
                     cat $filename
-                    cat $name
+                    cat aqui pelo shel de outro job - $name
                     
