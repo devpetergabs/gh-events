@@ -26,8 +26,7 @@ jobs:
                 echo "Idade: ${{ inputs.idade }}"
                 echo "idade-saida=$((${{ inputs.idade }} + 5))" >> $GITHUB_OUTPUT
                 echo "GITHUB_ACTOR é $GITHUB_ACTOR"
-
-
+                echo "nome_atual=$GITHUB_ACTOR" >> $GITHUB_ENV
 
     exibir-idade-saida:
         needs: exibir-variaveis
@@ -36,5 +35,5 @@ jobs:
             - name: mostrar idade de saida do job anterior
               run: |
                 echo "Idade de saída do job anterior: ${{ needs.exibir-variaveis.outputs.idade-saida }}"
-
+                
                 

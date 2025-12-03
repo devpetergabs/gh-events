@@ -14,7 +14,8 @@ jobs:
         env:
             GITHUB_CONTEXT: ${{ toJson(github) }}            ##define o contexto github como variavel de ambiente do contexto env
         outputs:
-            filename: ${{ steps.create.outputs.filename }}   ##define o output filename do job como o output filename do step create id create
+            filename: ${{ steps.create.outputs.filename }}  ##define o output filename do job como o output filename do step create id create]
+            name: ${{ steps.upload.outputs.name }}  ##define o output name do job como o output name do step upload id upload
         steps:
             - name: checkout code
               uses: actions/checkout@v4
@@ -44,7 +45,10 @@ jobs:
                 name: sample-artifacts
                 path: |
                  name-artifact.txt
-                 ${{ env.ARQUIVO_NOME }}.txt
+                 ${{ env.ARQUIVO_NOME }}.
+                 name = "Gabriel"
+                 echo "name=$name" >> $GITHUB_OUTPUT ##define o output name do job como o nome do arquivo criado
+                 echo $name
                  artifacts
                  
     consumir-artefato:
@@ -61,4 +65,5 @@ jobs:
                     echo "Using artifact..."
                     ls 
                     cat $filename
+                    cat $name
                     
