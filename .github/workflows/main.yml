@@ -7,6 +7,12 @@ on:
     paths-ignore:
       - '.github/workflows/uso-variaveis-.yml'  ##ignorar mudanças em uso-pratico
   workflow_dispatch:
+    inputs:
+      arquivo-nome:
+        description: 'Nome do arquivo a ser criado'
+        required: false
+        default: 'arq'
+        type: string
 
 jobs:
   job1:
@@ -23,7 +29,7 @@ jobs:
   job2:
     uses: ./.github/workflows/uso-pratico.yml  ##chama o workflow uso-pratico como reuso de codigo
     with:
-      nome-arquivo: 'teste'  ##passa o parametro nome-arquivo para o workflow uso-pratico
+      nome-arquivo: '${{ github.event.inputs.arquivo-nome }}'  ##passa o parametro nome-arquivo para o workflow uso-pratico
   job3:
     uses: ./.github/workflows/uso-variaveis-.yml  ##chama o workflow uso-variaveis como reuso de codigo
     with:
