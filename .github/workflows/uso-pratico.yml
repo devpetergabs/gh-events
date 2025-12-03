@@ -65,12 +65,16 @@ jobs:
               env:
                   archive-name: ${{ needs.gerar-artefato.outputs.archive-name }}
               run: |
-                    echo "Checando arquivos baixados..."
+                    echo "Lista de arquivos baixados:"
+                    ls -la
+                    echo "Conteúdo dos arquivos baixados:"
+                    echo "arquivo de concatenacao: $name + $archive-name"
                     cat name-artifact.txt
+                    echo "arquivo com nome do evento acionado:"
                     cat $archive-name.txt
+                    echo "arquivo com nome do autor:"
                     cat $name.txt
-                    echo "Nome do arquivo de artefato baixado: $archive-name"
-                    echo "Nome do arquivo de saída do job anterior: $name"
                     
+
                     
                     
