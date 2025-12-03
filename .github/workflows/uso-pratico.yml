@@ -67,6 +67,6 @@ jobs:
               run: |
                     echo "Using artifact..."
                     ls 
-                    cat $filename
+                    cat $archive-name
                     cat aqui pelo shel de outro job - $name
                     
