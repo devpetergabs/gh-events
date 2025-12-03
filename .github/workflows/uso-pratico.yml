@@ -39,7 +39,8 @@ jobs:
                 echo "$GITHUB_CONTEXT" >> contexts.json
                 echo "$GITHUB_CONTEXT" >> context.json
                 
-            - name: upload artifact
+            - name: upload 
+              id: upload
               uses: actions/upload-artifact@v4
               with:
                 name: sample-artifacts
