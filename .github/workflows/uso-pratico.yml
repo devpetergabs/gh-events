@@ -55,7 +55,7 @@ jobs:
         runs-on: ubuntu-latest
         env:
             name: ${{ needs.gerar-artefato.outputs.name }}
-            archive-name: ${{ needs.gerar-artefato.outputs.archive-name }}
+            archive_name: ${{ needs.gerar-artefato.outputs.archive-name }}
         steps:
             - name: download artifact
               uses: actions/download-artifact@v4
@@ -67,7 +67,7 @@ jobs:
                     echo "Lista de arquivos baixados:"
                     ls -la
                     echo "Conteúdo dos arquivos baixados:"
-                    echo "arquivo de concatenacao: $name + $archive-name"
+                    echo "arquivo de concatenacao: $name + $archive_name"
                     cat name-artifact.txt
                     cat $name.txt
                
