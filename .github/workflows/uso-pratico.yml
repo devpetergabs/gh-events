@@ -29,8 +29,9 @@ jobs:
             - name: set output filename
               id: set-name
               run: |
-                echo "name=$"Gabriel"" >> $GITHUB_OUTPUT 
-                echo "name=Gabriel" >> $GITHUB_ENV 
+                NOME="Gabriel"
+                echo "name=$NOME" >> $GITHUB_OUTPUT 
+                echo "name=$NOME" >> $GITHUB_ENV 
                 
             - name: create artifact
               id: create
