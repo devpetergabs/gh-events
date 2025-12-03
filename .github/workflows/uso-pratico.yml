@@ -68,6 +68,7 @@ jobs:
                     ls -la
                     echo "Conteúdo dos arquivos baixados:"
                     echo "arquivo de concatenacao: $name + $archive-name"
+                    cat name-artifact.txt
                
 
                     
